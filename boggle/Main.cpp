@@ -1,18 +1,19 @@
-//*********************************************************//
-// Program 3 - Boggle                                      //
-// Written By: Cardi DeMonaco Jr.                          //
-// Date: October 25, 2007 - November 14, 2007              //
-// Description:  This program mimmicks the game
-//    Boggle.  A 4x4 board will be made for User
-//    to find words in.  Words can be made by
-//    connecting letters that surround the letter
-//    that is being focused on.  When the user's time
-//    is up, the computer will then find the words that
-//    the user did not find.  If the user finds more
-//    than half of the words, they will probably win
-//    (depending on the points for the words).  Words
-//    found must be more than two letters long.
-//*********************************************************//
+//**********************************************************//
+// Program 3 - Boggle										//
+// Written By: Cardi DeMonaco Jr.							//
+// Date: October 25, 2007 - November 14, 2007				//
+// Updated: 2016											//
+// Description:  This program mimmicks the game				//
+//    Boggle.  A 4x4 board will be made for User			//
+//    to find words in.  Words can be made by				//
+//    connecting letters that surround the letter			//
+//    that is being focused on.  When the user's time		//
+//    is up, the computer will then find the words that		//
+//    the user did not find.  If the user finds more		//
+//    than half of the words, they will probably win		//
+//    (depending on the points for the words).  Words		//
+//    found must be more than two letters long.				//
+//**********************************************************//
 
 #include<string>
 #include<vector>
@@ -20,9 +21,10 @@
 #include<algorithm>
 #include<fstream>
 #include<time.h>
+#include<stdlib.h> // srand, rand 
 using namespace std;
 
-//Declare global variables...
+//Global variables...
 const int SQUARES = 4; // Number of lines of text needed for the game
 const int MAXTIME = 60000; // Amount of time (in milliseconds?) that is allowed to input words
 const int SIDES = 6; // Number of sides on a Die
@@ -30,10 +32,10 @@ vector<string> dict; // Dictionary
 vector<string> user; // Holds User words
 vector<string> puter; // Holds Computer words
 
-//Function prototypes...
+//Functions...
 void dictionary(); // Makes the Dictionary to search words for in
-void makeBoard(char board[SQUARES][SQUARES]);   // Makes the Board
-void printBoard(const char board[SQUARES][SQUARES]);// Prints the Board
+void makeBoard(char board[SQUARES][SQUARES]); // Makes the Board
+void printBoard(const char board[SQUARES][SQUARES]); // Prints the Board
 char copyBoard(const char[SQUARES][SQUARES], char[SQUARES][SQUARES]); // Copies Board
 int checkWord(int, int, const string); // Finds a word in the dictionary
 void puterWords(char board[SQUARES][SQUARES], int x, int y, string word); // Finds computer words
@@ -49,7 +51,7 @@ int main()
 
 	//Make the Boggle board...
 	char board[SQUARES][SQUARES]; // Board
-	makeBoard(board);
+	makeBoard(board); // Create the Boggle Board using the cubes.txt file
 
 	//Print the Boggle board so the User can see it...
 	printBoard(board);
@@ -103,10 +105,10 @@ int main()
 //Put all Boggle words into a Vector...
 void dictionary()
 {
-	//Pre-conditions:
-	//Post-conditions:
+	//Pre-conditions: Dictionary is empty
+	//Post-conditions: Dictionary is full, using bogwords.txt
 
-	//Populate dictionary vector
+	//Populate dictionary vector...
 	string filename;
 	ifstream input;
 	string wd;
@@ -136,18 +138,20 @@ void makeBoard(char board[SQUARES][SQUARES])
 	ifstream input; //Input File stream
 	input.open(filename.c_str());
 
-	//Insert items into Board (one for each row in the input file)...
+	//Insert items onto Board (one for each row in the input file)...
 	string currentCube; //Current Cube of the cubes.txt file
-	srand(time(NULL));
+	srand(time(NULL)); 
 	for (int i = 0; i<SQUARES; i++)
 	{
 		for (int j = 0; j<SQUARES; j++)
 		{
-			//currentCube is the whole row of the sides of the die (6 characters)...
+			//currentCube will be the whole row of the sides of the die (6 characters)...
 			input >> currentCube;
 
-			//Convert uppercase side of die to lowercase letter
-			char selectedSide = currentCube[rand() % SIDES] + 32;
+			//Pick the letter that will be used for this location on the Board...
+			char selectedSide = currentCube[rand() % SIDES]; 
+			//cout << "rand(): " << rand() << " | ";
+			//cout << "rand() % SIDES:" << rand() % SIDES << " | ";
 			board[i][j] = selectedSide;
 		}
 	}
@@ -173,6 +177,8 @@ void makeBoard(char board[SQUARES][SQUARES])
 		}
 	}
 
+	// Or use the following for a "default" Board...
+	/*
 	board[0][0] = 'i';
 	board[0][1] = 'p';
 	board[0][2] = 'o';
@@ -189,7 +195,7 @@ void makeBoard(char board[SQUARES][SQUARES])
 	board[3][1] = 'o';
 	board[3][2] = 'i';
 	board[3][3] = 'n';
-
+	*/
 }
 
 //******************************************************************************************************//
