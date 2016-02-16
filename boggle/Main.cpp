@@ -58,8 +58,10 @@ int main()
 
 	//User can enter words until time is up...
 	string word; //Word input by user
-	long now = clock(); // Clock for timing user
+	long now = clock(); // Clock for timing user... saving the current time
 
+	//Allow user to enter as many words as they would like for the configured time period
+	// RFE: Allow user to choose how much time they have to play the game
 	while (now + MAXTIME  > clock())
 	{
 		cout << "Enter word: ";
@@ -67,20 +69,20 @@ int main()
 		for (int x = 0; x<word.size(); x++)
 		{
 			//Fix case of the word that the user put in...
+			// The dictionary is all lowercase, so the user's input
+			// needs to be made lowercase or else they will not match
 			if ((word[x] >= 65) && (word[x] <= 96))
 			{
 				word[x] = word[x] + 32;
 			}
-
 		}
 		user.push_back(word);
 	}
 
-
-
+	// End the game for the user...
 	cout << "TIME IS UP." << endl << endl;
 
-	//Computer finds ALL words...
+	// Computer finds ALL words...
 	for (int x = 0; x<4; x++)
 	{
 		for (int y = 0; y<4; y++)
@@ -140,7 +142,7 @@ void makeBoard(char board[SQUARES][SQUARES])
 
 	//Insert items onto Board (one for each row in the input file)...
 	string currentCube; //Current Cube of the cubes.txt file
-	srand(time(NULL)); 
+	srand(clock());
 	for (int i = 0; i<SQUARES; i++)
 	{
 		for (int j = 0; j<SQUARES; j++)
@@ -161,7 +163,6 @@ void makeBoard(char board[SQUARES][SQUARES])
 	char tempItem2;
 	int a;
 	int b;
-
 	srand(clock());
 	for (int i = 0; i<SQUARES; i++)
 	{
@@ -169,7 +170,6 @@ void makeBoard(char board[SQUARES][SQUARES])
 		{
 			a = rand() % SQUARES;
 			b = rand() % SQUARES;
-
 			tempItem1 = board[a][b];
 			tempItem2 = board[i][j];
 			board[i][j] = tempItem1;
@@ -202,9 +202,10 @@ void makeBoard(char board[SQUARES][SQUARES])
 
 void printBoard(const char board[SQUARES][SQUARES]) // prints the board
 {
-	//Pre-conditions:
-	//Post-conditions:
+	//Pre-conditions: Must have already run makeBoard
+	//Post-conditions: This will print to the screen the Boggle board
 
+	//Go through each row and then each column in the row...
 	for (int i = 0; i<SQUARES; i++)
 	{
 		cout << "        ";
@@ -278,7 +279,7 @@ void puterWords(char board[SQUARES][SQUARES], int x, int y, string word) //Compu
 	//Post-conditions:
 
 	string tempWord = word;
-	int max = 7; // Maximum length of a word that can be found
+	int max = 7; // Maximum length of a word that can be found (adds greatly to the recursion factor)
 
 	char tempBoard[SQUARES][SQUARES];
 	copyBoard(board, tempBoard);
@@ -412,10 +413,11 @@ void puterWords(char board[SQUARES][SQUARES], int x, int y, string word) //Compu
 //******************************************************************************************************//
 
 //Check to see if computer word has already been used...
+// RFE: Have this function return TRUE or FALSE, and use that value appropriately
 void checkPuterWord(string word)
 {
-	//Pre-conditions:
-	//Post-conditions:
+	//Pre-conditions: Must have a dictionary to check against
+	//Post-conditions: If an appropriate word, add to the computer's list
 
 	bool found = false;
 
@@ -439,154 +441,85 @@ void checkPuterWord(string word)
 //******************************************************************************************************//
 
 void score() //Computes Player and Computer's score
-
 {
-
-	//Pre-conditions:
-
-	//Post-conditions:
-
-
+	//Pre-conditions: User and Computer must have already found their words
+	//Post-conditions: The score is printed for the user to see
 
 	cout << "YOUR WORDS: " << endl;
 
 	int uTotal = 0;
-
 	for (int i = 0; i<user.size(); i++)
-
 	{
-
 		//Check if User's word is in Computer's list...
-
 		bool foundInPuterList = false;
-
 		for (int j = 0; j<puter.size(); j++)
-
 		{
-
 			if (user[i] == puter[j])
-
 			{
-
 				foundInPuterList = true;
-
 			}
-
 		}
 
-
-
 		//If found in the Computer's list...
-
 		if (foundInPuterList == true)
-
 		{
-
 			//Check if word has already been used...
-
 			bool foundInOwnList = false;
-
 			for (int j = 0; j <= i; j++)
-
 			{
-
 				if (user[i] == user[j] && i != j)
-
 				{
-
 					foundInOwnList = true;
-
 				}
-
 			}
 
-
-
 			//If already used...
-
 			if (foundInOwnList == true)
-
 			{
-
 				cout << user[i] << ": " << "Already Used" << endl;
-
 			}
 
 			//If word is found in dictionary, give points...
-
 			else
-
 			{
-
 				cout << user[i] << ": " << user[i].size() - 2 << endl;
-
 				uTotal = uTotal + (user[i].size() - 2);
-
 			}
-
 		}
 
 		else
-
 		{
-
+			// Alert user that their word was illegal
 			cout << user[i] << ": " << "Illegal" << endl;
-
 		}
-
 	}
 
-	cout << "TOTAL: " << uTotal << endl;
-
-
-
-	cout << endl;
-
-
+	cout << "TOTAL: " << uTotal << endl << endl;
 
 	//List all words that the computer found
-
 	cout << "PUTER'S WORDS:" << endl;
 
 	int pTotal = 0;
-
 	for (int i = 0; i<puter.size(); i++)
-
 	{
-
 		bool found = false;
 
-
-
 		//Go through user's list...
-
 		for (int j = 0; j<user.size(); j++)
-
 		{
-
 			//If found in User's list...
-
 			if (puter[i] == user[j])
-
 			{
-
 				found = true;
-
 			}
-
 		}
-
 		if (found == false)
-
 		{
-
 			cout << puter[i] << ": " << puter[i].size() - 2 << endl;
-
 			pTotal = pTotal + (puter[i].size() - 2);
 		}
 	}
 	cout << "TOTAL: " << pTotal << endl;
 }
-
 
 //******************************************************************************************************//
