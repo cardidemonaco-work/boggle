@@ -1,7 +1,7 @@
-//******************************************************************************************************//
-// Program 3 - Boggle                                                                                                                           //
-// Written By: Cardi DeMonaco Jr.                                                                                                         //
-// Date: October 25, 2007 - November 14, 2007                                                                                       //
+//*********************************************************//
+// Program 3 - Boggle                                      //
+// Written By: Cardi DeMonaco Jr.                          //
+// Date: October 25, 2007 - November 14, 2007              //
 // Description:  This program mimmicks the game
 //    Boggle.  A 4x4 board will be made for User
 //    to find words in.  Words can be made by
@@ -12,7 +12,7 @@
 //    than half of the words, they will probably win
 //    (depending on the points for the words).  Words
 //    found must be more than two letters long.
-//******************************************************************************************************//
+//*********************************************************//
 
 #include<string>
 #include<vector>
