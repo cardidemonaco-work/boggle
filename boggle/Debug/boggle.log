@@ -1,16 +1,1 @@
-﻿  Main.cpp
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(67): warning C4018: '<': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(289): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(304): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(319): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(334): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(349): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(364): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(379): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(394): warning C4018: '<=': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(422): warning C4018: '<': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(454): warning C4018: '<': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(462): warning C4018: '<': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(552): warning C4018: '<': signed/unsigned mismatch
-d:\github\cardidemonaco-work boggle\boggle\main.cpp(562): warning C4018: '<': signed/unsigned mismatch
-  boggle.vcxproj -> D:\GitHub\cardidemonaco-work boggle\Debug\boggle.exe
+﻿  boggle.vcxproj -> D:\GitHub\cardidemonaco-work boggle\boggle\Debug\boggle.exe
