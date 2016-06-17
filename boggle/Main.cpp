@@ -15,6 +15,8 @@
 //    found must be more than two letters long.				//
 //**********************************************************//
 
+//Edited to ensure Git is working... 6/17/2016 
+
 #include<string>
 #include<vector>
 #include<iostream>
